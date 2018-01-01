@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block styles %}
+<style> 
+.jumbotron {
+	text-align: center;
+}
+</style>
+{% endblock %}
+
+
+{% block jumbotron %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>MuleMunchies</h1>
+        <p>Colby Spa Ordering System Without the Hassle!</p>
+      </div>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+        <div class="col-md-4">
+          <h2>About:</h2>
+          <p>MuleMunchies was developed by two Colby seniors who both wished that they could order food from the spa
+          without having to deal with the long wait times that comes with it. Simply sign up, select your food, pay, then
+          pick up your food! </p>
+          <p><a class="btn btn-default" href="{% url 'menu' %}" role="button">Get Started »</a></p>
+        </div>
+        <div class="col-md-4"> 
+        <a hred='#'><img src= "{% static 'img/mule.jpg' %}" class='img-responsive'/></a>
+       </div>
+        <div class="col-md-4">
+        {% if request.user.is_authenticated %}
+        <h3>Hello, you are signed in as: {{ request.user }} </h3>
+        <p><a class="btn btn-default" href="{% url 'account_logout' %}" role="button">Sign-Out »</a></p>
+        {% else %}
+        	<form class="login" method="POST" action="{% url 'account_login' %}">
+        	{% csrf_token %}
+  
+
+<div id="div_id_login" class="form-group"> <label for="id_login" class="control-label  requiredField">
+                Login<span class="asteriskField">*</span> </label> <div class="controls "> <input type="text" name="login" autofocus="autofocus" required="" placeholder="Username or e-mail" class="textinput textInput form-control" id="id_login"> </div> </div> <div id="div_id_password" class="form-group"> <label for="id_password" class="control-label  requiredField">
+                Password<span class="asteriskField">*</span> </label> <div class="controls "> <input type="password" name="password" required="" placeholder="Password" class="textinput textInput form-control" id="id_password"> </div> </div> <div class="form-group"> <div id="div_id_remember" class="checkbox"> <label for="id_remember" class=""> <input type="checkbox" name="remember" class="checkboxinput" id="id_remember">
+                    Remember Me
+                </label> </div> </div>
+  <a class="btn btn-link button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+  <a class="btn btn-link button secondaryAction" href="{% url 'account_signup' %}">Signup</a>
+  <button class="btn btn-default primaryAction" type="submit">Sign In</button>
+</form>
+{% endif %}
+        </div>
+</div>
+{% endblock %}

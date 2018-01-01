@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Menu Items</h1>
+<div>
+	{% for food in menu %}
+	{{ food }}
+	<strong> Price: ${{food.price}}</strong>
+	<a href="{% url "add" %}?id={{ food.id }}" class="btn btn -default">Add {{food.name}}</a>
+	<a href="{% url "remove" %}?id={{ food.id }}" class="btn btn -default">Remove?</a> <br/>
+	{% endfor %}
+	<p><a class="btn btn-default" href="{% url 'checkout' %}" role="button">Go to Cart/Checkout »</a></p>
+</div>
+{% endblock %}
